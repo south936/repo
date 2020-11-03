@@ -16,15 +16,15 @@
             </el-header>
             <el-main>
               <div class="left" v-if="list.toString() !== ''">
-                <el-row v-for="(item, index) in list" :key="index">
-                  <el-col :span="2" :class="item.state ? 'yes' : ''">
-                    <span @click="changeState(index, item.state)">
+                <el-row v-for="(item, index) in list" :key="index"  :span="2"  @click="changeState(index, item.state)">
+                  <el-col :span="2">
+                    <span>
                       <el-checkbox v-model="item.state"></el-checkbox
                     ></span>
                   </el-col>
-                  <el-col :span="12" :offset="1">{{ item.content }}</el-col>
-                  <el-col :span="4">{{ item.createTime }}</el-col>
-                  <el-col :span="5">
+                  <el-col :span="12" :offset="1" ><span :class="item.state ? 'yes' : ''">{{ item.content }}</span></el-col>
+                  <el-col :span="4" ><span :class="item.state ? 'yes' : ''">{{ item.createTime }}</span></el-col>
+                  <el-col :span="4" :offset="1">
                     <i
                       class="el-icon-delete red"
                       size="mini"
@@ -55,7 +55,11 @@ export default {
   data() {
     return {
       toDoSth: "",
-      list: [],
+      list: [{
+        state: true,
+        content:"111",
+        createTime: new Date().toLocaleTimeString(),
+      }],
       finishList: [],
     };
   },
@@ -109,12 +113,10 @@ export default {
         // background: #000;
         .el-row > * {
           height: 10%;
+          color: #2c3e50;
           // line-height: 10%;
           .yes {
             color: #8c8c8c;
-          }
-          .red {
-            color: red;
           }
         }
       }
